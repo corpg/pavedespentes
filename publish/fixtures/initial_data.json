@@ -1,0 +1,15 @@
+[
+	{
+		"pk": "1",
+		"model": "publish.Categorie",
+		"fields": {
+			"nom": "Pavé Des Pentes",
+			"link": "pave-des-pentes",
+			"description": "Super-catégorie qui représente le site. Chaque catégorie créée est une fille de cette catégorie. Ajoutez un utilisateur administrateur de cette catégorie lui donnera les pleins droits pour ajouter/supprimer/modifier des catégories (de base pour les super-utilisateur).",
+			"cat_parent": "1",
+			"profondeur": "0",
+			"admin_users": ""
+		}
+	}
+]
+

@@ -1,0 +1,10 @@
+{# Vue de l'acceuil du site #}
+{% extends "base/base.html" %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block content %}
+
+
+
+{% endblock content %}

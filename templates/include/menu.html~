@@ -1,0 +1,19 @@
+{# Essayer d'utiliser un tag réalisant une boucle récursive ou introduisant de nouvelles variables permettant d'accéder facilement aux catégories filles suivant une profondeur inconnue... ==> tableau #}
+
+{% load publish_menu %}
+{% load_menu_categories m_categories %} {# Chargement de la liste des catégories dans une variable categories ! #}
+
+{% for cat in m_categories %}
+<div class="menu"
+    {% for c in cat %}
+        {% ifequal c.profondeur 1 %}
+            onMouseOver="show('cat_{{ c.nom }}');" onMouseOut="hide('cat_{{ c.nom }}');">
+            <a href="{% url detail c.nom|lower|iriencode %}">{{ c.nom }}</a>
+            <div id="cat_{{ c.nom }}" class="listMenu">      
+        {% else %}
+            <a href="{% url detail c.nom|lower %}">{{ c.nom }}</a><br />
+        {% endifequal %}
+    {% endfor %}
+    </div>
+</div>
+{% endfor %}

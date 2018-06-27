@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+{% load publish_categories %}
+{% load bbcode %}
+
+{% block title %}Détail des catégories{% endblock %}
+
+{% block content %}
+
+<h1 class="categorie">{{ categorie }}</h1>
+{{ categorie.description|bbcode }}
+{% if categorie.get_filles %}
+    <h2>Sous catégories dans cette catégorie:</h2>
+    {% for c in categorie.get_filles %}
+        <div class="sous_categorie">
+            - <a href="{{ c.get_absolute_url|iriencode }}" title="{{ c }}"><b>{{ c }}</b></a>: {{ c.description|bbcode }}<br />
+            {% for a in c|articles %}
+                {% if forloop.first %}
+                    <ul>
+                {% endif %}
+                    <li><a href="{{ a.get_absolute_url|iriencode }}" title="{{ a }}">{{ a }}</a><br />{{ a.sous_titre|bbcode }}</li>
+                {% if forloop.last %}
+                    </ul>
+                {% endif %}
+            {% empty %}
+                Pas d'article dans cette catégorie !
+            {% endfor %} 
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if articles %}
+    <h2>Articles dans cette catégorie:</h2>
+    {% for a in articles %}
+        <div class="article">
+            <p><a href="{{ a.get_absolute_url }}" title="{{ a }}">{{ a }}</a><br />
+            {{ a.sous_titre|bbcode }}</p>
+            Publié le {{ a.date_parution|date }} par {{ a.auteur.first_name }}.
+        </div>
+    {% endfor %}
+{% else %}
+<br />Pas d'article dans cette catégorie !
+{% endif %}
+
+{% endblock content %}

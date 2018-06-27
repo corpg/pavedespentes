@@ -1,0 +1,6 @@
+<div class="titre"> <img src="{{ MEDIA_URL }}images/logo.png" /> The best website for your news !</div>
+<div class="header_menu">
+    <a href="http://www.webnews.eu:8000">Acceuil</a> | 
+    <a href="http://www.webnews.eu:8000/admin/">Administration</a> | 
+    <a href="{% url contact 'tcontact' %}">Contact</a>
+</div>

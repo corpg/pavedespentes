@@ -1,0 +1,31 @@
+{% load publish_categories %}
+{# Essayer d'utiliser un tag réalisant une boucle récursive ou introduisant de nouvelles variables permettant d'accéder facilement aux catégories filles suivant une profondeur inconnue... ==> tableau #}
+
+{% load_menu %}
+
+<span class="menu_categories">
+    <a href="{% url index %}">Accueil</a>
+</span>
+
+{% for mere, filles in menu %}
+    <span class="menu_categories" {% if filles %}onmouseover="show('{{ mere.link }}')" onmouseout="hide('{{ mere.link }}')" {% endif %}>
+        <a href="{% url categorie mere.link|lower|iriencode %}">{{ mere.nom }}</a>
+        {% for cat in filles %}
+            {% if forloop.first %}
+                <div class="menu_categories_filles" id="{{ mere.link }}">
+            {% endif %}
+                <a href="{% url categorie mere.link|lower|iriencode cat.link|lower|iriencode %}">{{ cat.nom }}</a><br />
+            {% if forloop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </span>
+{% endfor %}
+
+<span class="menu_categories">
+    <a href="{% url contact %}">Contacts</a>
+</span>
+
+<span class="menu_categories">
+    <a href="{% url redac %}">La Rédac'</a>
+</span>

@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+{% load publish_categories %}
+{% load publish_generic %}
+{% load bbcode %}
+
+{% block head %}
+<!-- Partage facebook -->
+<meta name="title" content="{{ publication }}" />
+<meta name="description" content="{{ publication.sous_titre }}" />
+<meta name="medium" content="news" />
+{% endblock %}
+
+{% block title %}{{ publication }}{% endblock %}
+
+{% block content %}
+
+{# Titre #}
+<h1>{{ publication }}</h1>
+<h3>{{ publication.sous_titre|bbcode }}</h3>
+
+{# Image d'illustration #}
+{% if publication.illustration %}<div style="text-align: center;"><img src="{{ publication.illustration.url }}" class="article_illustration" title="{{ publication.illustration.name|filename }}" alt="{{ publication.illustration.name }}" /></div><br /><br />{% endif %}
+
+{# Coeur #}
+<span class="publication_content">
+{{ publication.contenu|bbcode }}
+</span>
+
+{# Informations #}
+<p class="publication_infos">
+{% if publication.online %}
+    Publié par {{ auteur|safe }} le {{ publication.date_parution|date }} à {{ publication.date_parution|time }} <a href="http://www.facebook.com/sharer.php?u={{ publication.get_complete_url|iriencode }}" title="Partager sur Facebook"><img src="{{ MEDIA_URL }}images/fb_share.png" width="20" height="20" alt="facebook sharer" /></a>
+{% else %}
+   Non publié par {{ auteur|safe }}
+{% endif %}
+</p>
+
+{% endblock content %}

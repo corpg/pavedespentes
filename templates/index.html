@@ -1,0 +1,34 @@
+{# Vue de l'acceuil du site #}
+{% extends "base/base.html" %}
+{% load bbcode %}
+{% load publish_news %}
+
+{# Google #}
+{% block head %}
+<meta name="google-site-verification" content="pD-KSTx-FeQ4GUhEG3nrH_5v25xHOdgN6R8is_G53pM" />
+{% endblock %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+
+{% if edito %}
+<h2 class="edito">{{ edito.titre }}</h2>
+<p>
+{{ edito.contenu|bbcode }}
+</p>
+{% endif %}
+
+<h2>Dernières publications:</h2>
+{% get_last_news 4 last_pub %}
+{% for a in last_pub %}
+    <div class="index_last ">
+        <a href="{{ a.get_absolute_url }}">{% if a.illustration %}<img src="{{ a.illustration.url }}" title="{{ a.illustration.name }}" alt="{{ a.illustration.name }}" />{% endif %}<h6>{{ a }}</h6></a>
+        <p>
+        <br /><br />
+        {% if a.sous_titre %}{{ a.sous_titre|bbcode }}{% endif %}
+        </p>
+    </div>
+{% endfor %}
+
+{% endblock content %}

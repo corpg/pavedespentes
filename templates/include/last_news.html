@@ -1,0 +1,18 @@
+{% load publish_news %}
+{% load bbcode %}
+
+{% get_last_news 5 %}
+
+{% for a in last_news %}
+    <a href="{{ a.get_absolute_url }}">
+        <div class="last_news">
+            <h6>{{ a }}</h6>
+            <br />
+            {% if a.sous_titre %}{{ a.sous_titre|bbcode }}<br />{% endif %}
+         
+            <div class="last_news_categorie"><span style="float: left;">{% if not a.is_paru_today %}{{ a.date_parution|date:"d/m"}} {% endif %}{{ a.date_parution|time }}</span><span style="float: right;">{{ a.get_arbo }}</span></div>
+        </div>
+    </a>
+{% empty %}
+    Désolé, aucun article récent n'a été publié !
+{% endfor %}

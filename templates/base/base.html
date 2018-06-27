@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+        <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+        <title>Le Pavé des Pentes | {% block title %}{% endblock %}</title>
+        
+        <!-- Mots clés pour l'indexation par les moteurs de recherches -->
+        <meta name="Keywords" content="pavé, pentes, pavédespentes, pavédespente, pavedespente, pavédespentes, pavé des pentes, pavé des pente, pave des pentes, pave des pente, journalisme, actualités, actu, 
+        
+        <!-- Icon -->
+        <link rel="icon" type="image/png" href="{{ MEDIA_URL }}images/icon.png" />
+        
+        <!-- Style -->
+        <meta http-equiv="content-style-type" content="text/css" />
+        <link title="style" type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}styles/default.css" media="screen, projector" />
+	
+	    <!-- Javascript -->
+	    <script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}scripts/javascript.js"></script>
+	    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="body">
+        <!-- Tête de la page (header) -->
+        <div id="header">
+            {% include "include/header.html" %}
+        </div>
+        
+        <!-- Menu principal -->
+        <div id="menu">
+            {% include "include/menu.html" %}
+        </div>
+        
+        <!-- Middle -->
+        <div id="middle">
+            <!-- Dernière news -->
+            <div id="last_news">
+                {% include "include/last_news.html" %}
+            </div>
+            
+            <!-- Contenu de la page -->
+            <div id="content">
+                {% block content %}Content...{% endblock %}
+            </div>
+        </div>
+        
+        <!-- Bas de la page (footer) -->
+        <div id="footer">
+            {% include "include/footer.html" %}
+        </div>
+    </div>
+</body>
+</html>
